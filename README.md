@@ -1,174 +1,69 @@
-# JobScout — 通用求职猎手
+# Xiaohe LLM Eval Interview Bootcamp
 
-AI 驱动的智能求职搜索系统。不只搜招聘 App，而是**全网搜索**——公司官网、行业社区、社交平台、搜索引擎全覆盖。浏览器自动化基于 CDP (Chrome DevTools Protocol)，复用真实浏览器环境，不触发反爬。
+> 7 天定向训练：把 Coding 从“可能否决项”练到“稳定不拖后腿”，同时把 LLM Eval / Benchmark / Data Engineering 变成可面试表达、可现场实现的能力。
 
-## 功能
+## 目标岗位
 
-- **5 步画像** — 回答 5 个问题，系统了解你的需求
-- **全网搜索** — Boss直聘 / LinkedIn / 公司官网 / 行业论坛 / 社交媒体 / 搜索引擎
-- **稳键浏览器** — 基于 CDP 协议直连 Chrome，复用真实 Cookie 和登录态
-- **智能过滤** — 自动排除不符合条件的岗位，按匹配度排序
-- **报告输出** — Markdown 报告，一目了然
-- **定时推送** — 可配置 cronjob 每日自动搜索推送（Hermes 环境）
+医疗大模型评测 / 数据工程师（研发-算法方向），以及相近的 LLM Eval / Benchmark / Data Engineer 岗位。
 
-## 快速开始
+## 原则：少而精
 
-### 方式一：作为 Hermes Skill 使用（推荐）
+只练 4 类核心能力：
 
-```bash
-# 1. 加载 skill
-skill_view(name='job-scout')
+1. **Python + 高频数据结构**：dict/set、sliding window、heap、BFS/拓扑、LRU。
+2. **Evaluator + 数据处理 Coding**：指标、异常输入、Judge 聚合、batch evaluation。
+3. **LLM Eval / Benchmark 设计**：truth、rubric、judge calibration、shortcut/leakage、regression。
+4. **评测系统工程**：async、retry、rate limit、cache、checkpoint、idempotency、provenance。
 
-# 2. 开始一次搜索
-cd /mnt/d/JobScout
-python3 src/interview.py  # 回答5个问题建立画像
+不追求题量。**同一模式连续两次 ≥8/10 就停止刷该模式。**
 
-# 3. 执行搜索
-python3 src/search.py --profile config/profile.yml
+## 7 天路径
 
-# 4. 查看报告
-cat output/report-*.md
-```
+| Day | 重点 | 结果 |
+|---|---|---|
+| 1 | Python 容器 + 数据处理基本功 | 能稳定写 A1 / B1 |
+| 2 | 高频算法模式 | 掌握 A2 / A3 / A4；A5 至少理解并能写 |
+| 3 | Evaluator | B1 / B2 独立实现并写 edge cases |
+| 4 | Async + 可恢复评测 | B3 独立完成；解释 retry/idempotency |
+| 5 | Eval / Benchmark | C1 / C2 15 分钟内结构化回答 |
+| 6 | System Design | D1 / D2 能从 flow → failure → provenance → cost 展开 |
+| 7 | 全真模拟 | 2 次 60 分钟技术面，定位最后 1–2 个弱点 |
 
-### 方式二：独立 Python 脚本
+详见 [`ROADMAP_7D.md`](./ROADMAP_7D.md)。
 
-```bash
-pip install requests beautifulsoup4 pyyaml
+## 每天怎么练
 
-# 直接传参搜索
-python3 src/search.py \
-  --title "AI审计" \
-  --location "北京" \
-  --salary_min 13000 \
-  --exclude "事务所"
-```
+固定循环：
 
-## 项目结构
+**Learn → Closed-book Recall → Timed Coding/Design → Tests/追问 → Rubric → Error Log → Variant → Stop/Advance**
 
-```
-JobScout/
-├── README.md
-├── config/
-│   ├── profile.yml          # 用户画像（5个问题生成）
-│   └── questions.yml        # 5个画像问题定义
-├── src/
-│   ├── interview.py         # 交互式画像采集
-│   ├── search.py            # 搜索入口
-│   ├── browser_search.py    # CDP 浏览器搜索引擎
-│   ├── web_search.py        # HTTP 搜索引擎（备用）
-│   ├── analyze.py           # 岗位匹配分析
-│   └── report.py            # 报告生成
-├── scripts/
-│   └── run.sh               # 一键搜索脚本
-└── output/                  # 搜索报告输出
-```
+详见 [`DAILY_LOOP.md`](./DAILY_LOOP.md)。
 
-## 5 个画像问题
+## 文件
 
-系统会问你：
+- [`ROADMAP_7D.md`](./ROADMAP_7D.md)：7 天逐日训练表。
+- [`DAILY_LOOP.md`](./DAILY_LOOP.md)：每天可复用的学习+练习模板。
+- [`CORE_12.md`](./CORE_12.md)：12 个能力锚点，不无限扩题。
+- [`QUESTION_ENGINE.md`](./QUESTION_ENGINE.md)：给 GPT / Claude / Codex 的自适应出题协议。
+- [`RUBRIC.md`](./RUBRIC.md)：严格评分标准。
+- [`LEARNING_NOTES.md`](./LEARNING_NOTES.md)：只保留面试必须掌握的知识骨架。
+- [`PROGRESS.md`](./PROGRESS.md)：训练记录与升级门槛。
+- [`MOCK_INTERVIEW.md`](./MOCK_INTERVIEW.md)：Day 7 全真模拟规则。
 
-1. **目标岗位** — 你找什么工作？（如 AI审计师、财务BI分析师）
-2. **工作地点** — 期望在哪儿？（如北京、上海、远程）
-3. **薪资期望** — 月薪或年薪范围？
-4. **经验背景** — 几年经验？做过什么？
-5. **硬性条件** — 有什么绝对不能接受的吗？（如不要事务所、必须有双休）
+## 给 Agent 的启动语句
 
-## 搜索来源
+直接把仓库链接给 Agent，然后说：
 
-| 来源 | 方式 | 反爬策略 |
-|------|------|---------|
-| Boss直聘 | Web 搜索 + 浏览器 | CDP 真实浏览器 |
-| 猎聘 | 浏览器 | CDP 真实浏览器 |
-| LinkedIn | Web 搜索 | HTTP 请求 |
-| 公司官网招聘页 | Web 搜索 | HTTP 请求 |
-| 知乎 / 小红书 | Web 搜索 | HTTP 请求 |
-| Google / Bing | Web 搜索 | HTTP 请求 |
-| 36氪 / 行业媒体 | Web 搜索 | HTTP 请求 |
+> 读取 README、ROADMAP_7D、QUESTION_ENGINE 和 PROGRESS。按当前 Day 开始训练。一次只给一个学习块或一道题；不要提前给答案。我的答案完成后按 RUBRIC 严格评分，并更新我应该进入的下一步。
 
-## 浏览器引擎说明
+## 最终通过线
 
-本系统使用 **CDP (Chrome DevTools Protocol)** 直连用户的 Chrome 浏览器，而非 Playwright/Puppeteer 等自动化框架。
+面试前至少达到：
 
-### 优势
+- Coding：5 个核心模式中 ≥4 个可在 25–35 分钟独立完成；
+- Evaluator：B1/B2/B3 全部 ≥8/10；
+- Eval：C1/C2 均能在 15 分钟内 ≥8/10；
+- System：D1/D2 均能在 15–20 分钟内 ≥8/10；
+- Mock：至少 1 次 60 分钟模拟总评为“稳定通过”。
 
-- **真实浏览器环境** — 复用你的 Chrome 登录态、Cookie、扩展
-- **不被反爬识别** — 无 WebDriver 特征，和真实用户一致
-- **支持中文网站** — Boss直聘、猎聘等国内站点不拦截
-- **低资源占用** — 不启动额外浏览器实例，直接连已运行的 Chrome
-
-### 前置要求
-
-1. **Chrome/Edge 已安装**（Windows）
-2. **启动时开启 CDP 端口**：
-   ```
-   # Windows PowerShell（关闭所有 Chrome 后执行）
-   Start-Process -FilePath "C:\Program Files\Google\Chrome\Application\chrome.exe" `
-     -ArgumentList "--remote-debugging-port=9222"
-   ```
-   或用 Edge：
-   ```
-   Start-Process -FilePath "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" `
-     -ArgumentList "--remote-debugging-port=9222"
-   ```
-
-### 备用引擎
-
-如果 CDP 连接失败，自动降级为 HTTP 请求引擎（`web_search.py`），使用 requests + BeautifulSoup，带随机 UA 头和代理轮换。
-
-## 配置文件
-
-```yaml
-# config/profile.yml
-name: "你的名字"
-target_title: "AI审计师"          # 目标岗位
-location: "北京"                  # 期望地点
-salary:
-  min: 13000                     # 最低月薪
-  max: 30000                     # 期望月薪
-  type: "monthly"                # monthly / yearly
-experience_years: 3
-hard_requirements:
-  - "双休"
-  - "五险一金"
-exclude_conditions:
-  - "会计师事务所"
-  - "单休"
-  - "外包"
-keywords: ["AI", "审计", "数据分析", "Python"]
-```
-
-## Hermes 定时推送（可选）
-
-如果你在使用 Hermes Agent，可以配置 cronjob 每天自动搜索推送：
-
-```bash
-# 创建 cronjob（每天早8点搜索一次）
-cronjob create \
-  --name "每日岗位搜索" \
-  --schedule "0 8 * * *" \
-  --skills job-scout \
-  --prompt "根据 /mnt/d/JobScout/config/profile.yml 的配置，执行一次全网搜索，筛选匹配岗位，生成报告推送到群聊。"
-```
-
-## 报告示例
-
-```markdown
-# 求职搜索报告 — 2026-06-25
-
-## 匹配岗位（按匹配度排序）
-
-### 1. ⭐ AI审计工程师 — 某互联网大厂（北京）
-- **薪资**: 20K-35K × 14薪
-- **要求**: 3年以上审计/数据分析经验
-- **匹配**: 技能 ✅ 地点 ✅ 薪资 ✅
-- **来源**: Boss直聘
-- **链接**: https://...
-- **推荐理由**: AI审计方向，大厂，薪资符合预期
-
-### 2. 财务BI分析师 — 某科技公司（北京）
-...
-```
-
-## 许可
-
-MIT
+**目标不是成为算法竞赛选手，而是让正常 Coding 题不再淘汰你，让 Eval / Benchmark / 医疗科研判断力决定结果。**
