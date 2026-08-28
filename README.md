@@ -1,69 +1,103 @@
 # Xiaohe LLM Eval Interview Bootcamp
 
-> 7 天定向训练：把 Coding 从“可能否决项”练到“稳定不拖后腿”，同时把 LLM Eval / Benchmark / Data Engineering 变成可面试表达、可现场实现的能力。
+> 7 天定向训练：**牛客 / LeetCode 风格 Coding 为主，LLM Eval / Data Engineering 为辅。**
+>
+> 目标不是刷很多题，而是让正常 Easy / Medium 不再淘汰你，再用 Eval / Benchmark / 医疗领域能力拉开差距。
 
-## 目标岗位
+## 为什么这样改
 
-医疗大模型评测 / 数据工程师（研发-算法方向），以及相近的 LLM Eval / Benchmark / Data Engineer 岗位。
+面试方已明确说明技术面需要线上写代码，题型会比较类似牛客 / 力扣。因此训练权重调整为：
 
-## 原则：少而精
+- **Algorithm Coding：约 75%**
+- **Evaluator / Eval / Data / System：约 25%**
 
-只练 4 类核心能力：
+题目选择参考近期字节大模型/算法公开面经、小荷健康实习面经，以及 CodeTop/LeetcodeTop 字节长期高频统计。
 
-1. **Python + 高频数据结构**：dict/set、sliding window、heap、BFS/拓扑、LRU。
-2. **Evaluator + 数据处理 Coding**：指标、异常输入、Judge 聚合、batch evaluation。
-3. **LLM Eval / Benchmark 设计**：truth、rubric、judge calibration、shortcut/leakage、regression。
-4. **评测系统工程**：async、retry、rate limit、cache、checkpoint、idempotency、provenance。
+## 最小核心范围
 
-不追求题量。**同一模式连续两次 ≥8/10 就停止刷该模式。**
+算法只保留 `LEETCODE_CORE_15.md` 中 15 个锚点：
 
-## 7 天路径
+- HashMap / Stack / String parsing；
+- Linked List；
+- Sliding Window；
+- Interval；
+- Tree BFS；
+- Grid DFS/BFS；
+- Heap / Top-K；
+- Binary Search；
+- LRU；
+- 少量 DP / 括号栈 / 数值二分；
+- 1 道字节代表性链表 stretch。
 
-| Day | 重点 | 结果 |
+**不刷 Hot100 全套。** 同一模式连续两次 ≥8/10 就停止日常刷该模式。
+
+岗位能力题仍保留在 `CORE_12.md`，用于每 3 道 Coding 穿插一次 Evaluator / Eval / System 训练。
+
+---
+
+# 最推荐的使用方式：把仓库交给 DeepSeek
+
+先看：[`START_DEEPSEEK.md`](./START_DEEPSEEK.md)
+
+你只需要把本仓库链接 + 里面那段启动 prompt 发给 DeepSeek。
+
+DeepSeek 将按 [`DEEPSEEK_TUTOR.md`](./DEEPSEEK_TUTOR.md) 执行：
+
+**一次一道题 → 你回答 → 严格评分 → 定位最致命错误 → 最小教学 → RETRY / VARIANT / ADVANCE。**
+
+在你提交答案前，它不会告诉你：
+
+- LeetCode 编号；
+- 原题名称；
+- 算法标签；
+- 关键数据结构；
+- 标准答案。
+
+这样更接近真实面试。
+
+---
+
+# 7 天路径
+
+| Day | 主线 | 目标 |
 |---|---|---|
-| 1 | Python 容器 + 数据处理基本功 | 能稳定写 A1 / B1 |
-| 2 | 高频算法模式 | 掌握 A2 / A3 / A4；A5 至少理解并能写 |
-| 3 | Evaluator | B1 / B2 独立实现并写 edge cases |
-| 4 | Async + 可恢复评测 | B3 独立完成；解释 retry/idempotency |
-| 5 | Eval / Benchmark | C1 / C2 15 分钟内结构化回答 |
-| 6 | System Design | D1 / D2 能从 flow → failure → provenance → cost 展开 |
-| 7 | 全真模拟 | 2 次 60 分钟技术面，定位最后 1–2 个弱点 |
+| 1 | Python + HashMap/Stack/String/链表 | 基础题不因语法和指针挂掉 |
+| 2 | Sliding Window / Interval / Binary Search | 建立高频数组题模式识别 |
+| 3 | Tree + Grid BFS/DFS | 掌握树和二维遍历 |
+| 4 | Heap / LRU / 链表实现 | 提升数据结构现场实现能力 |
+| 5 | 字节公开面经强化 + Eval | 最大正方形、最长有效括号、sqrt 等 |
+| 6 | Mixed Coding + Eval/System | 陌生题面迁移 |
+| 7 | 两轮 60 分钟全真模拟 | 只补最后一个最大风险 |
 
 详见 [`ROADMAP_7D.md`](./ROADMAP_7D.md)。
 
-## 每天怎么练
+---
 
-固定循环：
+# 文件导航
 
-**Learn → Closed-book Recall → Timed Coding/Design → Tests/追问 → Rubric → Error Log → Variant → Stop/Advance**
-
-详见 [`DAILY_LOOP.md`](./DAILY_LOOP.md)。
-
-## 文件
-
-- [`ROADMAP_7D.md`](./ROADMAP_7D.md)：7 天逐日训练表。
-- [`DAILY_LOOP.md`](./DAILY_LOOP.md)：每天可复用的学习+练习模板。
-- [`CORE_12.md`](./CORE_12.md)：12 个能力锚点，不无限扩题。
-- [`QUESTION_ENGINE.md`](./QUESTION_ENGINE.md)：给 GPT / Claude / Codex 的自适应出题协议。
+- [`START_DEEPSEEK.md`](./START_DEEPSEEK.md)：**最先看。** 复制一段话即可启动 DeepSeek 教练。
+- [`DEEPSEEK_TUTOR.md`](./DEEPSEEK_TUTOR.md)：单题循环、评分、教学、自适应选题协议。
+- [`LEETCODE_CORE_15.md`](./LEETCODE_CORE_15.md)：15 道最小核心算法锚点。
+- [`ROADMAP_7D.md`](./ROADMAP_7D.md)：7 天循序渐进训练表。
+- [`DAILY_LOOP.md`](./DAILY_LOOP.md)：每天固定 Learn → Practice → Review 模板。
+- [`PROGRESS.md`](./PROGRESS.md)：训练状态和错误记录。
 - [`RUBRIC.md`](./RUBRIC.md)：严格评分标准。
-- [`LEARNING_NOTES.md`](./LEARNING_NOTES.md)：只保留面试必须掌握的知识骨架。
-- [`PROGRESS.md`](./PROGRESS.md)：训练记录与升级门槛。
-- [`MOCK_INTERVIEW.md`](./MOCK_INTERVIEW.md)：Day 7 全真模拟规则。
+- [`CORE_12.md`](./CORE_12.md)：Evaluator / Eval / System 岗位能力题。
+- [`LEARNING_NOTES.md`](./LEARNING_NOTES.md)：最小知识骨架。
+- [`MOCK_INTERVIEW.md`](./MOCK_INTERVIEW.md)：Day 7 模拟协议。
+- [`QUESTION_ENGINE.md`](./QUESTION_ENGINE.md)：旧版通用 Agent 出题协议；DeepSeek 训练优先以 `DEEPSEEK_TUTOR.md` 为准。
 
-## 给 Agent 的启动语句
+---
 
-直接把仓库链接给 Agent，然后说：
+# 最终通过线
 
-> 读取 README、ROADMAP_7D、QUESTION_ENGINE 和 PROGRESS。按当前 Day 开始训练。一次只给一个学习块或一道题；不要提前给答案。我的答案完成后按 RUBRIC 严格评分，并更新我应该进入的下一步。
+面试前希望达到：
 
-## 最终通过线
+- Level 1 四个基础模式全部稳定；
+- Level 2 七个高频 Medium 至少 6 个 PASS；
+- 任意陌生常见 Medium 能先给 brute force，再逐步优化，而不是空白；
+- Evaluator Coding 不成为短板；
+- Eval/System 设计能在 15–20 分钟内形成结构；
+- 至少一轮 60 分钟 Mock 达到整体 ≥8/10。
 
-面试前至少达到：
-
-- Coding：5 个核心模式中 ≥4 个可在 25–35 分钟独立完成；
-- Evaluator：B1/B2/B3 全部 ≥8/10；
-- Eval：C1/C2 均能在 15 分钟内 ≥8/10；
-- System：D1/D2 均能在 15–20 分钟内 ≥8/10；
-- Mock：至少 1 次 60 分钟模拟总评为“稳定通过”。
-
-**目标不是成为算法竞赛选手，而是让正常 Coding 题不再淘汰你，让 Eval / Benchmark / 医疗科研判断力决定结果。**
+**目标不是成为算法竞赛选手，而是让 Coding 不再拥有一票否决权。**
