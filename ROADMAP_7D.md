@@ -1,379 +1,292 @@
-# ROADMAP 7D — 循序渐进训练路径
+# ROADMAP 7D — 牛客 / LeetCode 风格冲刺版
 
-> 默认每天 6–8 小时。若只有 3–4 小时，保留“核心学习 + 核心题 + 复盘”，删掉第二个变式，不删测试和复盘。
+> 面试官已明确说明 Coding 类似牛客 / 力扣，因此本路线调整为：**Coding 约 75%，Eval/Data/System 约 25%。**
+>
+> 每天默认 6–8 小时；如果只有 3–4 小时，只做标记为 P0 的内容。
 
-## 总体升级规则
+## 总原则
 
-每个能力都经历 4 层：
+每个算法模式都必须经历：
 
-1. **理解**：能用自己的话说出模式、invariant、复杂度。
-2. **模仿**：看过一次参考框架后，关掉答案重新写。
-3. **迁移**：换医疗/评测语境后仍能识别同一模式。
-4. **面试**：限时、无提示、可运行、能自测、能扛追问。
+**Learn → 小例子手推 → Closed-book → Timed Problem → 自测 → 评分 → Variant**
 
-只有第 4 层 ≥8/10 才算“会”。
+只有：
+
+- 不看答案；
+- 不依赖 Hint 2/3；
+- 代码主逻辑正确；
+- 能说清复杂度和 invariant；
+- 同模式连续两次 ≥8/10；
+
+才记为 `MASTERED`。
+
+题库以 `LEETCODE_CORE_15.md` 为准。不要擅自扩 Hot100。
 
 ---
 
-# Day 1 — Python 基础 + 数据处理基本功
+# Day 1 — Python 现场 Coding + 四道基础反射
 
-## 今日目标
+## Learn（60–90 min）
 
-把“知道 Python”变成“现场不会因语法和容器卡住”。
+只补面试直接需要的 Python：
 
-## Learn（90 min）
+- list / dict / set / tuple；
+- `enumerate / zip / sorted`；
+- `Counter / defaultdict / deque`；
+- 函数、循环、条件、异常；
+- 链表节点的基本写法；
+- 时间/空间复杂度怎么口述。
 
-只学：
+## P0 Practice
 
-- list / tuple / dict / set；
-- membership、插入、查找的典型复杂度；
-- `enumerate` / `zip` / `sorted(key=...)`；
-- `Counter` / `defaultdict`；
-- list/dict/set comprehension；
-- 函数、异常、空输入；
-- JSON / JSONL 基本读写；
-- 去重、分组、排序、聚合。
+按顺序做：
 
-不要学 class 花活、装饰器、metaclass。
+1. LC1 模式 — HashMap；
+2. LC20 模式 — Stack；
+3. LC165 模式 — String parsing；
+4. LC206 模式 — Linked List。
 
-## Closed-book Recall（30 min）
+前两题 15 min，后两题 15–20 min。
 
-不查资料手写：
+## 每题固定动作
 
-- 按 key 分组；
-- tuple 作为 dict key；
-- 去重但保序；
-- 按字段排序；
-- Counter 统计频次；
-- 读取 JSONL 并逐行处理。
-
-## Practice 1（45 min）
-
-做 **A1 去重 + 最新记录**。
-
-要求：
-- 25 min 内完成；
-- 自己写 3 个测试；
-- 解释 O(n) 与最终排序的复杂度；
-- 追问：数据不能一次进内存怎么办？
-
-## Practice 2（60 min）
-
-做 **B1 医疗问答 Evaluator**。
-
-先只实现 micro precision / recall / F1，再补：
-- empty pred；
-- duplicate diagnosis；
-- missing field；
-- empty gold；
-- malformed input 的明确策略。
+- 先用 2–3 句话讲思路；
+- 写完整 Python；
+- 自己给 2 个测试；
+- 说复杂度；
+- 说明最容易错的边界。
 
 ## Exit Gate
 
-必须满足：
-- A1 ≥8/10；
-- B1 ≥7/10；
-- `dict/set/Counter/defaultdict/sorted` 不需要查语法。
-
-未通过：Day 2 前先做同模式 1 个变式，不增加新知识。
+4 题至少 3 题 ≥8，且 LC206 必须能独立写。
 
 ---
 
-# Day 2 — 高频算法模式，不刷题海
+# Day 2 — 高频数组：Sliding Window / Interval / Binary Search
 
-## 今日目标
+## Learn（90 min）
 
-建立“看到题 → 识别模式”的反射。
+只学三个 invariant：
 
-## Learn（120 min）
+### Sliding Window
+- 当前窗口代表什么；
+- 何时移动 left；
+- 为什么 left 不回退。
 
-只学 5 个模式：
+### Interval
+- 为什么先排序；
+- 当前 merged interval 代表什么。
 
-1. HashMap / Set；
-2. Sliding Window；
-3. Heap / Top-K；
-4. Queue + BFS / Topological Sort；
-5. LRU = HashMap + Doubly Linked List。
+### Binary Search
+- 搜索区间定义；
+- 循环条件；
+- 每次为什么一定缩小。
 
-每个模式只回答 4 个问题：
-- 什么时候用？
-- invariant 是什么？
-- 复杂度是什么？
-- 最常见 bug 是什么？
+## P0 Practice
 
-## Practice（3–4 h）
+1. LC3 模式 — 25 min；
+2. LC56 模式 — 25 min；
+3. LC33 模式 — 30 min。
 
-依次：
+## Variant
 
-- **A2 最长无重复窗口** — 30 min；
-- **A3 Top-K 错误类型** — 25 min；
-- **A4 任务依赖/拓扑排序** — 35 min；
-- **A5 LRU Cache** — 45 min。
+只从下面选 1 道迁移验证：
 
-每题结束必须：
-1. 自测至少 2 个 edge cases；
-2. 解释复杂度；
-3. 说出若数据规模扩大 1000 倍会发生什么；
-4. 关掉代码 20 分钟后重写关键部分。
+- LC153 模式；或
+- LC121 模式。
+
+不要两道都刷。
 
 ## Exit Gate
 
-- A2/A3/A4 中至少 3 个 ≥8/10；
-- A5 ≥7/10；
-- 能在 30 秒内说出题目属于哪个模式以及原因。
-
-不要因为 LRU 卡住就去刷 20 道链表题。
+LC3 必须 ≥8；LC56/LC33 至少一题 ≥8，另一题 ≥7。
 
 ---
 
-# Day 3 — Evaluator Coding：把它练成强项
+# Day 3 — Tree / Grid / BFS-DFS
 
-## 今日目标
-
-面试官一旦进入评测代码，你从“应付”转成“有工程判断”。
-
-## Learn（90 min）
+## Learn（60–90 min）
 
 掌握：
 
-- TP / FP / FN；
-- micro vs macro；
-- denominator 为 0 的定义；
-- schema validation；
-- missing / duplicate / malformed input；
-- deterministic evaluator；
-- unit test / regression test；
-- aggregate score 为什么可能掩盖高风险 slice。
+- queue BFS；
+- recursion / explicit stack DFS；
+- visited 的时机；
+- 二叉树 level boundary；
+- grid 四方向遍历。
 
-## Practice 1（60 min）
+## P0 Practice
 
-**B1 二刷**，换 schema，不看旧代码。
+1. LC102 模式 — 20 min；
+2. LC200 模式 — 30 min。
 
-增加：
-- 多样本；
-- 诊断项大小写/别名是否标准化的策略说明；
-- per-slice metric。
+LC200 完成后必须口述另一种 BFS/DFS 实现。
 
-## Practice 2（75 min）
+## Variant
 
-**B2 Judge Aggregation**。
+二选一：
 
-至少实现：
-- aggregate score；
-- disagreement flag；
-- missing judge；
-- out-of-range score 报错；
-- 4 个测试。
+- LC112 路径总和；
+- 岛屿面积类 grid variant。
 
-追问：
-- mean / median / majority vote 各有什么假设？
-- judge drift 怎么发现？
-- judge 自身需要怎样校准？
+## Eval 插针（45 min）
 
-## Mini Design（45 min）
+做 `CORE_12.md` 中 B1 evaluator coding。
 
-回答：为什么医疗评测不能只给一个总平均分？
-
-要求主动提：高风险 slice、安全红线、置信区间/不确定性、case mix。
+目的不是抢算法时间，而是保持岗位相关 coding 优势。
 
 ## Exit Gate
 
-B1、B2 **都 ≥8/10**。否则不进入 Day 4 的复杂工程题。
+LC200 ≥8；树/图遍历不能再因模板语法卡住；B1 ≥7。
 
 ---
 
-# Day 4 — Async + Retry + Resume：工程生存线
-
-## 今日目标
-
-能写一个“小而正确”的可恢复 batch evaluator，并解释为什么工业系统要这样设计。
-
-## Learn（120 min）
-
-只学：
-
-- `async` / `await`；
-- semaphore 控制并发；
-- timeout；
-- retry + exponential backoff；
-- rate limit；
-- sample-level status；
-- checkpoint；
-- cache；
-- idempotency key；
-- append-only result / upsert 的取舍；
-- resume。
-
-核心问题：**失败后能不能从断点恢复，而不是从头重跑？**
-
-## Guided Build（60 min）
-
-先自己写最小版本：
-
-`evaluate_one -> bounded concurrency -> gather results`
-
-然后逐层加入：
-
-`timeout -> retry -> state -> resume -> cache`
-
-每加一层都解释它解决哪种 failure mode。
-
-## Timed Practice（90 min）
-
-做 **B3 可恢复 Batch Evaluation**，从空白开始，限时 45–60 min。
-
-必须能回答：
-- worker/请求失败怎么办？
-- retry 会不会重复收费？
-- 如何做到 idempotent？
-- 如何跳过成功样本？
-- 怎样记录 error type？
-
-## Exit Gate
-
-B3 ≥8/10；能不用术语堆砌，画出 sample 从 pending → running → success/failed 的状态流。
-
----
-
-# Day 5 — Eval / Benchmark：把已有优势变成标准面试答案
-
-## 今日目标
-
-不是讲很多概念，而是形成一个固定的“可信评测骨架”。
+# Day 4 — Heap + LRU + 链表实现能力
 
 ## Learn（90 min）
 
-固定七步：
+### Heap
+- min-heap 为什么适合保留 Top-K；
+- O(n log k)；
+- Python `heapq` 基本 API。
 
-1. Task taxonomy / slice；
-2. 独立 truth / evidence；
-3. Metric / rubric；
-4. Judge calibration + human adjudication；
-5. Safety / high-risk errors；
-6. Leakage / shortcut / naive baseline / perturbation；
-7. Statistics + held-out regression。
+### LRU
+- 为什么需要 HashMap + Doubly Linked List；
+- head/tail sentinel；
+- move-to-front / remove / insert 的职责。
 
-## Practice 1（75 min）
+## P0 Practice
 
-**C1：模型 A vs B 谁更适合医疗问答？**
+1. LC215 模式 — 30 min；
+2. LC146 模式 — 40–45 min。
 
-第一次 20 min 答；根据追问重构；第二次压到 12–15 min。
+## 链表强化
 
-## Practice 2（75 min）
+根据 Day1 LC206 表现：
 
-**C2：如何证明 Benchmark 没有 shortcut？**
+- 如果 LC206 已 MASTERED：尝试 LC25 的分段框架；
+- 如果 LC206 仍不稳：不碰 LC25，先做同模式链表变式。
 
-必须区分：
-- contamination = 测试内容被见过；
-- shortcut = 即使没见过，也能利用非目标信号解题。
+## Eval 插针（60 min）
 
-## Stress Questions（45 min）
-
-连续回答：
-- truth 如果来自 LLM judge，哪里循环了？
-- 为什么平均分会掩盖医疗风险？
-- judge 与专家不一致怎么办？
-- benchmark 分数涨了，为什么不能立刻说模型变强？
+做 B2 Judge Aggregation 或 B3 batch evaluator 二选一。
 
 ## Exit Gate
 
-C1、C2 均 ≥8/10，且每题可在 15 min 内完成主干。
+LC215 ≥8；LC146 ≥7.5；能清楚解释 LRU 的 O(1) 从哪里来。
 
 ---
 
-# Day 6 — System Design：从单机 evaluator 到评测平台
+# Day 5 — 字节公开面经强化题
 
-## 今日目标
+这一天才引入少量更难模式，不提前学一堆 DP。
 
-形成稳定的系统设计顺序，而不是随机报技术名词。
+## Practice 1 — LC221 最大正方形
 
-## Learn（90 min）
+Learn 20–30 min：只理解这个 DP 状态，不系统学 DP 大全。
 
-固定顺序：
+Timed：30 min。
 
-**Requirements → Data model → Task flow → Concurrency → Failure recovery → Idempotency → Provenance → Observability → Cost → Trade-offs**
+## Practice 2 — LC32 最长有效括号
 
-## Practice 1（90 min）
+先尝试 30 min；失败后再进入 Stack mini-lesson。
 
-**D1：100 万回答 × 3 Judge**。
+## Practice 3 — sqrt(x)
 
-先画最小流：
+分别实现：
 
-`dataset -> task queue -> workers -> judge API -> result store -> aggregation/report`
+- binary search；
+- Newton iteration。
 
-然后逐个处理：rate limit、timeout、retry、cache、checkpoint、versioning、成本。
+目标不是背公式，而是能解释停止条件和精度。
 
-## Practice 2（90 min）
+## 岗位设计题（60–90 min）
 
-**D2：每周新模型，怎么判断真的变好？**
-
-主动分成：
-- frozen regression suite；
-- dynamic challenge set；
-- safety gate；
-- slice metrics；
-- significance / CI；
-- failure registry；
-- release gate / rollback。
-
-## Coding Refresh（60 min）
-
-随机抽 A2/A4/B2/B3 中一题，30 min 无提示写。
+做 C1：如何可信比较两个医疗 LLM。
 
 ## Exit Gate
 
-D1/D2 ≥8/10，随机 Coding ≥7.5/10。
+三道 Coding 强化题至少 2 道 ≥7.5；C1 ≥8。
 
 ---
 
-# Day 7 — 全真模拟 + 最小修补
+# Day 6 — Mixed Interview：陌生题面迁移
 
-## 今日目标
+停止按专题顺序刷。
 
-停止学习新知识，只验证“面试状态”。
+## Mock Coding A（45 min）
 
-## Mock 1（60 min）
+DeepSeek 从已学模式中随机出 1 道变式，隐藏 LeetCode 编号/标签。
 
-严格按 `MOCK_INTERVIEW.md`：
-- 5 min 项目/背景；
-- 30 min coding；
-- 15 min eval/system deep dive；
-- 10 min 追问。
+## Mock Coding B（45 min）
 
-结束后只记录：
-- 1 个致命弱点；
-- 1 个次要弱点；
-- 1 个优势。
+再随机 1 道不同模式。
 
-## Repair（90–120 min）
+## Stretch（45 min）
 
-只补 Mock 1 暴露出的**最致命一个问题**。
+如果基础链表稳定，做 LC25；否则随机回测最弱模式。
 
-不能因为错了一道滑窗题就去学动态规划。
+## Eval/System（90 min）
 
-## Mock 2（60 min）
+二选一主练，另一题只做 10 min 框架：
 
-换题面但不换能力模式。
+- C2 Benchmark shortcut/leakage；
+- D1 100 万回答 × 3 Judge。
 
-## Final Gate
+## Exit Gate
 
-满足任意一个条件即可停止：
+两道陌生题面 Coding 平均 ≥7.5，且至少一题 ≥8。
 
-- Mock 2 总评 ≥8/10；或
-- Coding ≥7.5、Evaluator/Eval/System 中至少两个 ≥8.5，且无致命 correctness/failure-recovery 问题。
-
-如果某一项仍 <7：面试前只练这一项，不再横向扩展。
+如果模式识别仍不稳定，Day7 不学新题，只回测弱项。
 
 ---
 
-# 这一周明确不学
+# Day 7 — 两轮真实 60 分钟技术面
 
-- LeetCode Hard；
-- 复杂 DP；
-- 红黑树、线段树等竞赛数据结构；
-- 深入 C++/Go；
-- 复杂分布式一致性理论；
-- 医学百科背诵；
-- 大模型训练公式大全。
+今天不学习新算法。
 
-除非真实面试反馈明确出现，否则不扩范围。
+## Mock 1
+
+- 5 min：项目/自我介绍；
+- 35 min：一题牛客/LeetCode 风格 Coding；
+- 15 min：Eval/Data/System 追问；
+- 5 min：代码复杂度和边界追问。
+
+结束只记录：
+
+- 最大 Coding 风险 1 个；
+- 最大表达风险 1 个。
+
+## Repair（90 min）
+
+只补最大 Coding 风险。
+
+## Mock 2
+
+同结构，再来一轮不同题面。
+
+## 最终通过线
+
+- Easy：基本 15 min 内完成；
+- 常见 Medium：25–35 min 内有正确主解；
+- 15 个核心中 Level1 全会、Level2 至少 6/7 PASS；
+- 近期字节强化模式至少 2 个能完成；
+- Eval/System 不成为短板；
+- Mock 2 Coding ≥7.5，整体 ≥8。
+
+---
+
+# 明确不做
+
+一周内不系统刷：
+
+- Hot100 全套；
+- DP 大全；
+- 图最短路大全；
+- 线段树 / 红黑树；
+- 冷门数学竞赛；
+- 大量 LeetCode Hard。
+
+LC25 是唯一保留的 Hard 级 stretch，因为它是字节长期代表性高频链表题；如果时间不够，可以放弃它而不影响整体计划。
+
+**原则始终是：少而精，先把正常 Medium 做稳。**
